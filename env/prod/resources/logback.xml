@@ -25,13 +25,16 @@
         </encoder>
     </appender>
     <logger name="org.xnio.nio" level="warn">
-        <AppenderRef ref="FILE"/>
+        <appender-ref ref="STDOUT" />
     </logger>
     <logger name="com.zaxxer.hikari" level="warn">
-        <AppenderRef ref="FILE"/>
+        <appender-ref ref="STDOUT" />
     </logger>
+    <root level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+        <!--<appender-ref ref="FILE"/>-->
+    </root>
     <root level="INFO">
         <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILE" />
     </root>
 </configuration>
