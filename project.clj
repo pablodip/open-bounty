@@ -96,7 +96,7 @@
   :profiles
   {:uberjar       {:jvm-opts ["-server" "-Dconf=config-prod.edn"]
                    :omit-source    true
-                   :prep-tasks     ["build-contracts" "javac" "compile" ["cljsbuild" "once" "min"] ["less" "once"]]
+                   ;:prep-tasks     ["build-contracts" "javac" "compile" ["cljsbuild" "once" "min"] ["less" "once"]]
                    :cljsbuild
                    {:builds
                     {:min
