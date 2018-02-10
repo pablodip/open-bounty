@@ -79,7 +79,11 @@
   :auto {"build-contracts" {:file-pattern #"\.(sol)\n"
                             :paths ["./contracts"]}}
 
-  :aliases {"build-contracts" ["shell" "./build_contracts.sh"]}
+  :aliases {"build-contracts" ["shell" "./build_contracts.sh"]
+            "prod-build"      ["do"
+                               ["with-profile" "prod" "less" "once"]
+                               ["with-profile" "prod" "cljsbuild" "once" "min"]
+                               ["with-profile" "prod" "uberjar"]]}
 
   :ring {:destroy commiteth.scheduler/stop-scheduler}
 
