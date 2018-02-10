@@ -81,9 +81,9 @@
 
   :aliases {"build-contracts" ["shell" "./build_contracts.sh"]
             "prod-build"      ["do"
-                               ["with-profile" "prod" "less" "once"]
-                               ["with-profile" "prod" "cljsbuild" "once" "min"]
-                               ["with-profile" "prod" "uberjar"]]}
+                               ["with-profile" "uberjar" "less" "once"]
+                               ["with-profile" "uberjar" "cljsbuild" "once" "min"]
+                               ["with-profile" "uberjar" "uberjar"]]}
 
   :ring {:destroy commiteth.scheduler/stop-scheduler}
 
