@@ -107,7 +107,7 @@
                      {:source-paths ["src/cljc" "src/cljs" "env/prod/cljs"]
                       :jar true
                       :compiler
-                      {:output-to     "target/cljsbuild/public/js/app.js"
+                      {:output-to     "resources/public/js/app.js"
                        :externs       ["externs/web3-externs.js"]
                        :optimizations :advanced
                        :pretty-print  false
