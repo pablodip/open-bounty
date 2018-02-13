@@ -5,8 +5,8 @@
             protocol.Web3j
             protocol.http.HttpService
             crypto.Credentials
-            crypto.WalletUtils]))
-
+            crypto.WalletUtils]
+           org.apache.http.message.BasicHeader))
 
 (defn wallet-file-path []
   (env :eth-wallet-file))
@@ -25,4 +25,10 @@
                       {:password password :file-path file-path})))))
 
 (defn create-web3j []
-  (Web3j/build (HttpService. (eth/eth-rpc-url))))
+  (let [http-service (proxy
+                       [HttpService]
+                       [(eth/eth-rpc-url)]
+                       (addHeaders [headers]
+                         (when (env :eth-rpc-auth-enabled)
+                           (.add headers (BasicHeader. "Authorization" (eth/authorization-header-val))))))]
+    (Web3j/build http-service)))

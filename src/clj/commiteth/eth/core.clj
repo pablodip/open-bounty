@@ -7,13 +7,21 @@
             [clojure.tools.logging :as log]
             [clojure.string :as str]
             [pandect.core :as pandect]
-            [commiteth.util.util :refer [json-api-request]]))
+            [commiteth.util.util :refer [json-api-request]])
+  (:import java.util.Base64))
 
 (defn eth-rpc-url [] (env :eth-rpc-url "http://localhost:8545"))
 (defn eth-account [] (:eth-account env))
 (defn eth-password [] (:eth-password env))
 (defn gas-estimate-factor [] (env :gas-estimate-factor 1.0))
 (defn auto-gas-price? [] (env :auto-gas-price? false))
+
+(defn authorization-header-val []
+  (let [user (env :eth-rpc-auth-user)
+        password (env :eth-rpc-auth-password)
+        encode-to-base64 (fn [v]
+                           (.encodeToString (Base64/getEncoder) (.getBytes v)))]
+    (str "Basic " (encode-to-base64 (str user ":" password)))))
 
 (defn eth-gasstation-gas-price
   []
@@ -47,8 +55,9 @@
                                   :method  method
                                   :params  params
                                   :id      request-id})
-        options  {:headers {"content-type" "application/json"}
-                  :body body}
+        options    {:headers (cond-> {"content-type" "application/json"}
+                                     (env :eth-rpc-auth-enabled) (merge {"authorization" (authorization-header-val)}))
+                    :body    body}
         response (:body @(post (eth-rpc-url) options))
         result   (json/read-str response :key-fn keyword)]
     (log/debug body "\n" result)
