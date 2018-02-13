@@ -59,6 +59,7 @@
                                      (env :eth-rpc-auth-enabled) (merge {"authorization" (authorization-header-val)}))
                     :body    body}
         response (:body @(post (eth-rpc-url) options))
+        _ (log/info "eth-rpc response: " response)
         result   (json/read-str response :key-fn keyword)]
     (log/debug body "\n" result)
 
