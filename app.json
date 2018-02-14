@@ -1,0 +1,66 @@
+{
+  "name": "status-open-bounty",
+  "scripts": {},
+  "env": {
+    "ETH_ACCOUNT": {
+      "required": true
+    },
+    "ETH_PASSWORD": {
+      "required": true
+    },
+    "ETH_RPC_URL": {
+      "required": true
+    },
+    "ETH_WALLET_FILE": {
+      "required": true
+    },
+    "ETH_WALLET_FILE_CONTENTS": {
+      "required": true
+    },
+    "GITHUB_CLIENT_ID": {
+      "required": true
+    },
+    "GITHUB_CLIENT_SECRET": {
+      "required": true
+    },
+    "GITHUB_PASSWORD": {
+      "required": true
+    },
+    "GITHUB_USER": {
+      "required": true
+    },
+    "LEIN_BUILD_TASK": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "SERVER_ADDRESS": {
+      "required": true
+    },
+    "USER_WHITELIST": {
+      "required": true
+    },
+    "WEBHOOK_SECRET": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "coralogix",
+    "papertrail",
+    "heroku-postgresql:hobby-basic"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/clojure"
+    },
+    {
+      "url": "https://github.com/simplefractal/heroku-buildpack-wkhtmltopdf.git#52b32b526dd634c2655978709abb649a492b706b"
+    }
+  ]
+}
