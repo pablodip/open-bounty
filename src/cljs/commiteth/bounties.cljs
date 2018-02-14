@@ -204,7 +204,7 @@
                      container-element]
   (if (empty? items)
     [:div.view-no-data-container
-     [:p "No matching bounties found."]]
+     [:p "No matching bounties found!"]]
     [:div
      (let [left  (inc (* (dec page-number) items-per-page))
            right (dec (+ left item-count))]
