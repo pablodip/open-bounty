@@ -210,7 +210,7 @@
            right (dec (+ left item-count))]
        [:div.item-counts-label-and-sorting-container
         [:div.item-counts-label
-         [:span (str "Showing " left "-" right " of " total-count)]]
+         [:span (str "Showing! " left "-" right " of " total-count)]]
         (when-not (util/os-windows?)
           [bounties-sort-view])])
      (display-data-page bounty-page-data bounty-item container-element)]))
