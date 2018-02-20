@@ -204,13 +204,13 @@
                      container-element]
   (if (empty? items)
     [:div.view-no-data-container
-     [:p "No matching bounties found."]]
+     [:p "No matching bounties found!"]]
     [:div
      (let [left  (inc (* (dec page-number) items-per-page))
            right (dec (+ left item-count))]
        [:div.item-counts-label-and-sorting-container
         [:div.item-counts-label
-         [:span (str "Showing " left "-" right " of " total-count)]]
+         [:span (str "Showing! " left "-" right " of " total-count)]]
         (when-not (util/os-windows?)
           [bounties-sort-view])])
      (display-data-page bounty-page-data bounty-item container-element)]))
